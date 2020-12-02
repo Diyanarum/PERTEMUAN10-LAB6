@@ -7,20 +7,9 @@ Pada di pertemuan ke 10 ini saya diberikan beberapa tugas oleh dosen saya, yaitu
 ## TUGAS LAB 6
 Yang mana pada LAB 6 ini terdapat beberapa soal seperti yang ada dibawah ini.
 
-![SOAL](https://user-images.githubusercontent.com/72906579/100184544-506b6900-2f14-11eb-8a6d-ffdd8ee9f249.png)
-
-Adapun hasil akhir yang diberikan dosen saya sebagai contoh output dari semua tugas diatas.
-
-![OUTPUT](https://user-images.githubusercontent.com/72906579/100184716-b22bd300-2f14-11eb-9ad1-618a25d9294b.png)
-
+![SOAL](https://user-images.githubusercontent.com/72906579/100826163-528d7480-348c-11eb-8384-baf420b03a08.png)
 ________________________________________________________________________________________________________________________
-Pada perintah pertama, saya disuruh untuk membuat sebuah program seperti diatas tetapi dengan  menggunakan Dictionary. Maka sebelum membuat programnya, saya diharuskan membuat Dictonary'nya terlebih dahulu. Yaitu dengan menggunakan ini
-```python
-a = {} # empty dict
-a = {'n1': 100, 'n2': 20, 'n3': 7} # dict with key:value
-```
-________________________________________________________________________________________________________________________
-Sebelum mulai mengerjakan soal nomer 2, dibawah ini saya telah menyantumkan beberapa syntax yang nantinya akan menghasilkan output dari semua data yang diantaranya adalah **(Tambah Data, Ubah Data, Hapus Data, Tampilkan Data, Cari Data)**
+Sebelum mulai mengerjakan soal nomer 1, dibawah ini saya telah menyantumkan beberapa syntax yang nantinya akan menghasilkan output dari semua data yang diantaranya adalah **(Tambah Data, Ubah Data, Hapus Data, Tampilkan Data, Cari Data)**
 ```python
 P = print
 while True:
@@ -209,8 +198,8 @@ while True:
 ```
 Nah disini saya akan mencoba untuk menjabarkan fungsi dari tiap-tiap syntax diatas beserta hasil outputnya.
 ________________________________________________________________________________________________________________________
-## TAMBAH DATA
-Pertama saya akan coba untuk menunjukan salah satu syntax diatas yang nantinya akan menghasilkan menu pilihan **'Tambah Data'** seperti inilah syntax nya.
+## SOAL 1 (TAMBAH DATA)
+Pada soal pertama saya akan coba untuk menunjukan salah satu syntax diatas yang nantinya akan menghasilkan menu pilihan **'Tambah Data'** seperti inilah syntax nya.
 ```python
     elif c.lower() == 't':
         i = open('database.txt','a')
@@ -263,10 +252,67 @@ Pertama saya akan coba untuk menunjukan salah satu syntax diatas yang nantinya a
 ```
 Jadi kesimpulannya jika kalian menggunakan semua syntax yang saya tunjukan diawal dan memasukan ***'T'*** pada kolom yang tersedia dan kalian run, maka akan mendapat output seperti ini
 
-![TAMBAH DATA](https://user-images.githubusercontent.com/72906579/100196070-ed390100-2f2a-11eb-995f-9ead15fa4705.png)
+![TAMBAH DATA](https://user-images.githubusercontent.com/72906579/100826168-54573800-348c-11eb-9e26-787e711cfcb0.png)
 ________________________________________________________________________________________________________________________
-## UBAH DATA
-Selanjutnya saya akan coba untuk menunjukan salah satu syntax diatas yang nantinya akan menghasilkan menu pilihan **'Ubah Data'** seperti inilah syntax nya.
+## SOAL 2 (TAMPILKAN DATA)
+Di soal kedua, saya akan coba untuk menunjukan salah satu syntax diatas yang nantinya akan menghasilkan menu pilihan **'Tampilkan Data'** seperti inilah syntax nya.
+```python
+    elif c.lower() == 'l':
+        i = open('database.txt','r').read().splitlines()
+        P(" ╔═════════════════════════════════════════════════════════════════════╗")
+        P(" ╠════════════════════════════ DAFTAR KONTAK ══════════════════════════╣")
+        P(" ╠══════════════════╦══════════════════╦═══════╦═══════╦═══════╦═══════╣")
+        P(" ║      NAMA        ║       NIM        ║ TUGAS ║  UTS  ║  UAS  ║ AKHIR ║")
+        P(" ╠══════════════════╬══════════════════╬═══════╬═══════╬═══════╬═══════╣")
+        for l in i:
+            if l == '':
+                pass
+            else:
+                l1 = l.replace('Nama : ','').replace('Nim : ','').replace('Tugas : ','').replace('UTS : ','').replace('UAS : ','').replace('Akhir : ','')
+                na,ni,tu,uts,uas,akhir = l1.strip().split('|')
+                P((' ║ ')+(na[:15]).ljust(17,'.')+('║ ')+(ni).ljust(17)+('║ ')+(tu).ljust(6)+('║ ')+(uts).ljust(6)+('║ ')+(uas).ljust(6)+('║ ')+(akhir).ljust(6)+('║'))
+        P(" ╚══════════════════╩══════════════════╩═══════╩═══════╩═══════╩═══════╝")
+```
+Jadi kesimpulannya jika kalian menggunakan semua syntax yang saya tunjukan diawal dan memasukan ***'L'*** pada kolom yang tersedia dan kalian run, maka akan mendapat output seperti ini
+
+![TAMPILKAN DATA](https://user-images.githubusercontent.com/72906579/100826172-54efce80-348c-11eb-8278-dc01fb62da76.png)
+________________________________________________________________________________________________________________________
+## SOAL 3 (HAPUS DATA)
+Di soal ketiga, saya akan coba untuk menunjukan salah satu syntax diatas yang nantinya akan menghasilkan menu pilihan **'Hapus Data'** seperti inilah syntax nya.
+```python
+ elif c.lower() == 'h':
+        u = open('database.txt','r').read().splitlines()
+        target = input(' Masukan Nama : ')
+        nm = []
+        for l in u:
+            if l == '':
+                pass
+            else:
+                l1 = l.replace('Nama : ','').replace('Nim : ','').replace('Tugas : ','').replace('UTS : ','').replace('UAS : ','').replace('Akhir : ','')
+                na,ni,tu,uts,uas,akhir = l1.strip().split('|')
+                if str(na) == str(target):
+                    P('BERHASIL MENGHAPUS Data %s'%(target))
+                    pass
+                else:
+                    nm.append(str(l)+'\n')
+        new = open('database.txt','w')
+        new.write(str(nm))
+        new.close()
+        new = open('database.txt','r').read().splitlines()
+        new1 = open('database.txt','w')
+        new1.close()
+        new2 = open('database.txt','a')
+        for i in new:
+            i2 = i.replace("['","").replace("\\n', '", "\n").replace("']","").replace("\\n",'')
+            new2.write(i2)
+        new2.close()
+```
+Jadi kesimpulannya jika kalian menggunakan semua syntax yang saya tunjukan diawal dan memasukan ***'H'*** pada kolom yang tersedia dan kalian run, maka akan mendapat output seperti ini
+
+![HAPUS DATA](https://user-images.githubusercontent.com/72906579/100826160-502b1a80-348c-11eb-9c71-dff958d13aab.png)
+________________________________________________________________________________________________________________________
+## SOAL 4 (UBAH DATA)
+Pada soal keempat, saya akan coba untuk menunjukan salah satu syntax diatas yang nantinya akan menghasilkan menu pilihan **'Ubah Data'** seperti inilah syntax nya.
 ```python
  elif c.lower() == 'u':
         u = open('database.txt','r').read().splitlines()
@@ -341,88 +387,7 @@ Selanjutnya saya akan coba untuk menunjukan salah satu syntax diatas yang nantin
 ```
 Jadi kesimpulannya jika kalian menggunakan semua syntax yang saya tunjukan diawal dan memasukan ***'U'*** pada kolom yang tersedia dan kalian run, maka akan mendapat output seperti ini
 
-![UBAH DATA](https://user-images.githubusercontent.com/72906579/100196704-d646de80-2f2b-11eb-9da7-fbbcf4827dcf.png)
-________________________________________________________________________________________________________________________
-## HAPUS DATA
-Selanjutnya saya akan coba untuk menunjukan salah satu syntax diatas yang nantinya akan menghasilkan menu pilihan **'Hapus Data'** seperti inilah syntax nya.
-```python
- elif c.lower() == 'h':
-        u = open('database.txt','r').read().splitlines()
-        target = input(' Masukan Nama : ')
-        nm = []
-        for l in u:
-            if l == '':
-                pass
-            else:
-                l1 = l.replace('Nama : ','').replace('Nim : ','').replace('Tugas : ','').replace('UTS : ','').replace('UAS : ','').replace('Akhir : ','')
-                na,ni,tu,uts,uas,akhir = l1.strip().split('|')
-                if str(na) == str(target):
-                    P('BERHASIL MENGHAPUS Data %s'%(target))
-                    pass
-                else:
-                    nm.append(str(l)+'\n')
-        new = open('database.txt','w')
-        new.write(str(nm))
-        new.close()
-        new = open('database.txt','r').read().splitlines()
-        new1 = open('database.txt','w')
-        new1.close()
-        new2 = open('database.txt','a')
-        for i in new:
-            i2 = i.replace("['","").replace("\\n', '", "\n").replace("']","").replace("\\n",'')
-            new2.write(i2)
-        new2.close()
-```
-Jadi kesimpulannya jika kalian menggunakan semua syntax yang saya tunjukan diawal dan memasukan ***'H'*** pada kolom yang tersedia dan kalian run, maka akan mendapat output seperti ini
-
-![HAPUS DATA](https://user-images.githubusercontent.com/72906579/100197395-da273080-2f2c-11eb-991a-631c2fbe86d5.png)
-________________________________________________________________________________________________________________________
-## TAMPILKAN DATA
-Selanjutnya saya akan coba untuk menunjukan salah satu syntax diatas yang nantinya akan menghasilkan menu pilihan **'Tampilkan Data'** seperti inilah syntax nya.
-```python
-    elif c.lower() == 'l':
-        i = open('database.txt','r').read().splitlines()
-        P(" ╔═════════════════════════════════════════════════════════════════════╗")
-        P(" ╠════════════════════════════ DAFTAR KONTAK ══════════════════════════╣")
-        P(" ╠══════════════════╦══════════════════╦═══════╦═══════╦═══════╦═══════╣")
-        P(" ║      NAMA        ║       NIM        ║ TUGAS ║  UTS  ║  UAS  ║ AKHIR ║")
-        P(" ╠══════════════════╬══════════════════╬═══════╬═══════╬═══════╬═══════╣")
-        for l in i:
-            if l == '':
-                pass
-            else:
-                l1 = l.replace('Nama : ','').replace('Nim : ','').replace('Tugas : ','').replace('UTS : ','').replace('UAS : ','').replace('Akhir : ','')
-                na,ni,tu,uts,uas,akhir = l1.strip().split('|')
-                P((' ║ ')+(na[:15]).ljust(17,'.')+('║ ')+(ni).ljust(17)+('║ ')+(tu).ljust(6)+('║ ')+(uts).ljust(6)+('║ ')+(uas).ljust(6)+('║ ')+(akhir).ljust(6)+('║'))
-        P(" ╚══════════════════╩══════════════════╩═══════╩═══════╩═══════╩═══════╝")
-```
-Jadi kesimpulannya jika kalian menggunakan semua syntax yang saya tunjukan diawal dan memasukan ***'L'*** pada kolom yang tersedia dan kalian run, maka akan mendapat output seperti ini
-
-![TAMPILKAN DATA](https://user-images.githubusercontent.com/72906579/100197701-3f7b2180-2f2d-11eb-9af1-5901edb0b9a6.png)
-________________________________________________________________________________________________________________________
-## MENCARI DATA
-Selanjutnya saya akan coba untuk menunjukan salah satu syntax diatas yang nantinya akan menghasilkan menu pilihan **'Mencari Data'** seperti inilah syntax nya.
-```python
- elif c.lower() == 'c':
-        cari = input(' Mencari : ')
-        i = open('database.txt','r').read().splitlines()
-        P(" ╔═════════════════════════════════════════════════════════════════════╗")
-        P(" ╠════════════════════════════ DAFTAR KONTAK ══════════════════════════╣")
-        P(" ╠══════════════════╦══════════════════╦═══════╦═══════╦═══════╦═══════╣")
-        P(" ║      NAMA        ║       NIM        ║ TUGAS ║  UTS  ║  UAS  ║ AKHIR ║")
-        P(" ╠══════════════════╬══════════════════╬═══════╬═══════╬═══════╬═══════╣")
-        for l in i:
-            if l == '':
-                pass
-            elif cari in l:
-                l1 = l.replace('Nama : ','').replace('Nim : ','').replace('Tugas : ','').replace('UTS : ','').replace('UAS : ','').replace('Akhir : ','')
-                na,ni,tu,uts,uas,akhir = l1.strip().split('|')
-                P((' ║ ')+(na).ljust(17)+('║ ')+(ni).ljust(17)+('║ ')+(tu).ljust(6)+('║ ')+(uts).ljust(6)+('║ ')+(uas).ljust(6)+('║ ')+(akhir).ljust(6)+('║'))
-        P(" ╚══════════════════╩══════════════════╩═══════╩═══════╩═══════╩═══════╝")
-```
-Jadi kesimpulannya jika kalian menggunakan semua syntax yang saya tunjukan diawal dan memasukan ***'C'*** pada kolom yang tersedia dan kalian run, maka akan mendapat output seperti ini
-
-![CARI DATA](https://user-images.githubusercontent.com/72906579/100198477-7c93e380-2f2e-11eb-96d4-b156762dc47a.png)
+![UBAH DATA](https://user-images.githubusercontent.com/72906579/100826174-55886500-348c-11eb-9b80-f8d99f8c9fda.png)
 ________________________________________________________________________________________________________________________
 ## NOTE: SYNTAX SATUAN DIATAS AKAN ERROR SAAT DI RUN, JIKA KALIAN TIDAK MENGINPUTNYA SEMUA! MAKA INPUTLAH SEMUA SYNTAX DIAWAL!!
 ________________________________________________________________________________________________________________________
